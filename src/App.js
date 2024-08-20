@@ -1,3 +1,10 @@
+import { Button } from "semantic-ui-react";
+
 export default function App() {
-  return <div>Hello world</div>;
+  return (
+    <div>
+      <Button primary>Primary</Button>
+      <Button secondary>Secondary</Button>
+    </div>
+  );
 }
