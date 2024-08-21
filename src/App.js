@@ -1,10 +1,12 @@
-import { Button } from "semantic-ui-react";
+import { BrowserRouter } from "react-router-dom";
+import { WebRouter } from "./router/WebRouter";
+import { AdminRouter } from "./router/AdminRouter";
 
 export default function App() {
   return (
-    <div>
-      <Button primary>Primary</Button>
-      <Button secondary>Secondary</Button>
-    </div>
+    <BrowserRouter>
+      <WebRouter />
+      <AdminRouter />
+    </BrowserRouter>
   );
 }
