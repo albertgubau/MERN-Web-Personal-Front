@@ -26,6 +26,10 @@
         border-top: 4px solid $border-gray;
         font-size: 18px;
 
+        &:hover {
+          background-color: $background-gray;
+        }
+
         &.active {
           font-weight: normal;
           border-radius: 0;
