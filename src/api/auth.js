@@ -1,4 +1,4 @@
-import { ENV } from "../utils";
+import { ENV } from "../utils/constants";
 
 export class Auth {
   baseApi = ENV.BASE_API;
@@ -6,7 +6,8 @@ export class Auth {
   async register(data) {
     try {
       const url = `${this.baseApi}/${ENV.API_ROUTES.REGISTER}`;
-      const params = {
+
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -15,9 +16,8 @@ export class Auth {
           email: data.email,
           password: data.password,
         }),
-      };
+      });
 
-      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;
@@ -46,5 +46,26 @@ export class Auth {
     } catch (error) {
       throw error;
     }
+  }
+
+  setAccessToken(token) {
+    localStorage.setItem(ENV.JWT.ACCESS, token);
+  }
+
+  getAccessToken() {
+    return localStorage.getItem(ENV.JWT.ACCESS);
+  }
+
+  setRefreshToken(token) {
+    localStorage.setItem(ENV.JWT.REFRESH, token);
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem(ENV.JWT.REFRESH);
+  }
+
+  removeTokens() {
+    localStorage.removeItem(ENV.JWT.ACCESS);
+    localStorage.removeItem(ENV.JWT.REFRESH);
   }
 }
