@@ -1,1 +1,40 @@
 @import "~/src/scss/index.scss";
+
+.user-form {
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+
+    .image {
+      border-radius: 50% !important;
+      width: 150px !important;
+      height: 150px !important;
+      margin: 0;
+      border: 2px dashed $primary;
+      padding: 5px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+
+        + .edit.icon {
+          display: block;
+          color: rgb(73, 73, 73);
+        }
+      }
+    }
+  }
+}
+
+.edit.icon {
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: none;
+  pointer-events: none;
+}

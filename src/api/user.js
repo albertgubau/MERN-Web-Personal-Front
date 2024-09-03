@@ -23,4 +23,36 @@ export class User {
       console.log(error);
     }
   }
+
+  async createUser(accessToken, data) {
+    try {
+      // To deal with the avatar multipart form we use FormData
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+
+      if (data.fileAvatar) {
+        formData.append("avatar", data.fileAvatar);
+      }
+
+      const url = `${this.baseApi}/${ENV.API_ROUTES.USER_NEW}`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.status !== 201) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
