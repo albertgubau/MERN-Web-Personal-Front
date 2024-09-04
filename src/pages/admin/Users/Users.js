@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
 import "./Users.scss";
 import { BasicModal } from "../../../components/Shared";
-import { UserForm } from "../../../components/Admin/Users";
+import { UserForm, UsersList } from "../../../components/Admin/Users";
 
 export function Users() {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +14,7 @@ export function Users() {
       menuItem: "Active users",
       render: () => (
         <Tab.Pane attached={false}>
-          <h2>Active users</h2>
+          <UsersList showActiveUsers={true} />
         </Tab.Pane>
       ),
     },
@@ -22,7 +22,7 @@ export function Users() {
       menuItem: "Inactive users",
       render: () => (
         <Tab.Pane attached={false}>
-          <h2>Inactive users</h2>
+          <UsersList showActiveUsers={false} />
         </Tab.Pane>
       ),
     },
