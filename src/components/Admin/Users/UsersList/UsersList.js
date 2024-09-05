@@ -1,14 +1,41 @@
+import { useState, useEffect } from "react";
+import { Loader } from "semantic-ui-react";
+import { size } from "lodash";
 import { User } from "../../../../api";
+import { useAuth } from "../../../../hooks";
+import { UserItem } from "../../../../components/Admin/Users";
 
 const userController = new User();
 
 export function UsersList(props) {
-  const { showActiveUsers } = props;
+  const { activeUsers, reload } = props;
+  const [users, setUsers] = useState(null);
+  const { accessToken } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setUsers(null);
+        const response = await userController.getUsers(
+          accessToken,
+          activeUsers
+        );
+        setUsers(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [activeUsers, reload]);
+
+  if (!users) return <Loader active inline="centered" />;
+
+  if (size(users) === 0) return "There are no users";
 
   return (
-    <div>
-      <h2>We are on userslist</h2>
-      <p>{showActiveUsers ? "Active users" : "Inactive users"}</p>
-    </div>
+    <>
+      {users.map((user) => (
+        <UserItem user={user} />
+      ))}
+    </>
   );
 }

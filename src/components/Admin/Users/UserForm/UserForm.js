@@ -5,23 +5,31 @@ import { useDropzone } from "react-dropzone";
 import { image } from "../../../../assets";
 import { initialValues, validationSchema } from "./UserForm.form";
 import { useAuth } from "../../../../hooks";
+import { ENV } from "../../../../utils";
 import { User } from "../../../../api";
 import "./UserForm.scss";
 
 const userController = new User();
 
 export function UserForm(props) {
-  const { close, onReload, user } = props;
+  const { onClose, onReload, user } = props;
 
   const { accessToken } = useAuth();
 
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues: initialValues(user),
+    validationSchema: validationSchema(user),
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
-        await userController.createUser(accessToken, formValues);
+        if (!user) {
+          await userController.createUser(accessToken, formValues);
+        } else {
+          console.log("UPDATE");
+          // await userController.updateUser(accessToken, formValues);
+        }
+        onReload();
+        onClose();
       } catch (error) {
         console.error(error);
       }
@@ -42,6 +50,8 @@ export function UserForm(props) {
   const getAvatar = () => {
     if (formik.values.fileAvatar) {
       return formik.values.avatar;
+    } else if (formik.values.avatar) {
+      return `${ENV.BASE_PATH}/${formik.values.avatar}`;
     }
     return image.noAvatar;
   };

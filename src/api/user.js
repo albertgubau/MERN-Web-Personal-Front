@@ -58,7 +58,7 @@ export class User {
 
   async getUsers(accessToken, active = undefined) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.USERS_ALL}?active = ${active}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.USERS_ALL}?active=${active}`;
 
       const response = await fetch(url, {
         method: "GET",
