@@ -16,7 +16,7 @@ export function Users() {
       menuItem: "Active users",
       render: () => (
         <Tab.Pane attached={false}>
-          <UsersList activeUsers={true} reload={reload} />
+          <UsersList activeUsers={true} reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },
@@ -24,7 +24,7 @@ export function Users() {
       menuItem: "Inactive users",
       render: () => (
         <Tab.Pane attached={false}>
-          <UsersList activeUsers={false} reload={reload} />
+          <UsersList activeUsers={false} reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },
@@ -42,7 +42,7 @@ export function Users() {
         show={showModal}
         onClose={onOpenCloseModal}
         title="Create a new user">
-        <UserForm close={onOpenCloseModal} onReload={onReload} />
+        <UserForm onClose={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
     </>
   );

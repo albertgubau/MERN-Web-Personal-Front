@@ -25,8 +25,7 @@ export function UserForm(props) {
         if (!user) {
           await userController.createUser(accessToken, formValues);
         } else {
-          console.log("UPDATE");
-          // await userController.updateUser(accessToken, formValues);
+          await userController.updateUser(accessToken, user._id, formValues);
         }
         onReload();
         onClose();
@@ -72,14 +71,14 @@ export function UserForm(props) {
       <Form.Group widths="equal">
         <Form.Input
           name="firstName"
-          placeholder="Name"
+          placeholder="First name"
           value={formik.values.firstName}
           onChange={formik.handleChange}
           error={formik.errors.firstName}
         />
         <Form.Input
           name="lastName"
-          placeholder="Lastname"
+          placeholder="Last name"
           value={formik.values.lastName}
           onChange={formik.handleChange}
           error={formik.errors.lastName}

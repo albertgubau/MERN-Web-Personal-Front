@@ -8,12 +8,14 @@ import "./UserItem.scss";
 import { User } from "../../../../api";
 
 export function UserItem(props) {
-  const { user } = props;
+  const { user, onReload } = props;
 
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
-  const onOpenCloseModal = () => setShowModal((prev) => !prev);
+  const onOpenCloseModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const openUserUpdate = () => {
     setModalTitle(`Update ${user.email}`);
@@ -54,13 +56,7 @@ export function UserItem(props) {
         show={showModal}
         onClose={onOpenCloseModal}
         title={modalTitle}>
-        <UserForm
-          onClose={onOpenCloseModal}
-          onReload={() => {
-            console.log("RELOAD");
-          }}
-          user={user}
-        />
+        <UserForm onClose={onOpenCloseModal} onReload={onReload} user={user} />
       </BasicModal>
     </>
   );

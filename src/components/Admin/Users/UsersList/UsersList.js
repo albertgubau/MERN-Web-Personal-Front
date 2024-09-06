@@ -8,7 +8,7 @@ import { UserItem } from "../../../../components/Admin/Users";
 const userController = new User();
 
 export function UsersList(props) {
-  const { activeUsers, reload } = props;
+  const { activeUsers, reload, onReload } = props;
   const [users, setUsers] = useState(null);
   const { accessToken } = useAuth();
 
@@ -34,7 +34,7 @@ export function UsersList(props) {
   return (
     <>
       {users.map((user) => (
-        <UserItem user={user} />
+        <UserItem user={user} onReload={onReload} />
       ))}
     </>
   );
