@@ -96,6 +96,27 @@ export class User {
     }
   }
 
+  async deleteUser(accessToken, userId) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.USERS}/${userId}`;
+
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getUsers(accessToken, active = undefined) {
     try {
       const url = `${this.baseApi}/${ENV.API_ROUTES.USERS_ALL}?active=${active}`;
@@ -112,6 +133,8 @@ export class User {
       if (response.status !== 200) throw result;
 
       return result;
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 }
