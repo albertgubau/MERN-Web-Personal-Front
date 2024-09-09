@@ -7,7 +7,7 @@ import { Menu } from "../../../../api";
 const menuController = new Menu();
 
 export function MenusList(props) {
-  const { activeMenus, reload } = props;
+  const { activeMenus, reload, onReload } = props;
   const [menus, setMenus] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function MenusList(props) {
   return (
     <>
       {menus.map((menu) => (
-        <MenuItem menu={menu} />
+        <MenuItem menu={menu} onReload={onReload} />
       ))}
     </>
   );

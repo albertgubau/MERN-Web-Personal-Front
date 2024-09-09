@@ -33,15 +33,15 @@ export function UserItem(props) {
     setIsDelete(false);
     setConfirmMessage(
       user.active
-        ? `Deactivate user ${user.email} ?`
-        : `Activate user ${user.email} ?`
+        ? `Deactivate user "${user.email}" ?`
+        : `Activate user "${user.email}" ?`
     );
     onOpenCloseConfirm();
   };
 
   const onOpenDeleteConfirm = () => {
     setIsDelete(true);
-    setConfirmMessage(`Delete user ${user.email} ?`);
+    setConfirmMessage(`Delete user "${user.email}" ?`);
     onOpenCloseConfirm();
   };
 

@@ -17,7 +17,7 @@ export function Menu() {
       menuItem: "Active menus",
       render: () => (
         <Tab.Pane attached={false}>
-          <MenusList activeMenus={true} reload={reload} />
+          <MenusList activeMenus={true} reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },
@@ -25,7 +25,7 @@ export function Menu() {
       menuItem: "Inactive menus",
       render: () => (
         <Tab.Pane attached={false}>
-          <MenusList activeMenus={false} reload={reload} />
+          <MenusList activeMenus={false} reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },
