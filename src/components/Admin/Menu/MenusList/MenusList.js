@@ -28,7 +28,7 @@ export function MenusList(props) {
   return (
     <>
       {menus.map((menu) => (
-        <MenuItem menu={menu} onReload={onReload} />
+        <MenuItem key={menu._id} menu={menu} onReload={onReload} />
       ))}
     </>
   );

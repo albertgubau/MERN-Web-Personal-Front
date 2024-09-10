@@ -34,7 +34,7 @@ export function UsersList(props) {
   return (
     <>
       {users.map((user) => (
-        <UserItem user={user} onReload={onReload} />
+        <UserItem key={user._id} user={user} onReload={onReload} />
       ))}
     </>
   );

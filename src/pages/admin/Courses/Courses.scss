@@ -1,0 +1,22 @@
+.courses-page {
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+    > .ui.button {
+      margin: 0;
+    }
+  }
+  .ui.tab.segment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
