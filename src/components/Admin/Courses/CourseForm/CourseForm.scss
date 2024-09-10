@@ -1,0 +1,40 @@
+@import "~/src/scss/index.scss";
+
+.course-form {
+  &__miniature {
+    margin-bottom: 16px;
+    position: relative;
+
+    > div {
+      width: 100%;
+      min-height: 120px;
+      border: 2px solid $primary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+        border: 2px dashed $primary;
+      }
+    }
+    > .ui.image {
+      width: 100%;
+      height: 250px;
+      margin: 0;
+      border: 2px dahsed primary;
+      padding: 5px;
+
+      &:hover {
+        opacity: 0.6;
+        cursor: pointer;
+        border: 2px dashed $primary;
+
+        + .edit.icon {
+          display: block;
+          color: rgb(73, 73, 73);
+        }
+      }
+    }
+  }
+}

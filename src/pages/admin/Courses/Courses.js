@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
 import { BasicModal } from "../../../components/Shared";
-import { CoursesList } from "../../../components/Admin/Courses/CoursesList/CoursesList";
+import { CoursesList, CourseForm } from "../../../components/Admin/Courses";
 import "./Courses.scss";
 
 export function Courses() {
   const [showModal, setShowModal] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const onOpenCloseModal = () => setShowModal((prev) => !prev);
+  const onReload = () => setReload((prev) => !prev);
 
   return (
     <>
@@ -18,7 +20,7 @@ export function Courses() {
           </Button>
         </div>
         <Tab.Pane attached={false}>
-          <CoursesList />
+          <CoursesList reload={reload} onReload={onReload} />
         </Tab.Pane>
       </div>
 
@@ -26,7 +28,7 @@ export function Courses() {
         show={showModal}
         onClose={onOpenCloseModal}
         title="Create course">
-        <p>Create course form</p>
+        <CourseForm onClose={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
     </>
   );

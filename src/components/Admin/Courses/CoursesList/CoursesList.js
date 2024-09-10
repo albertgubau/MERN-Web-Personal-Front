@@ -7,7 +7,9 @@ import "./CoursesList.scss";
 
 const courseController = new Course();
 
-export function CoursesList() {
+export function CoursesList(props) {
+  const { reload, onReload } = props;
+
   const [courses, setCourses] = useState(null);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState();
@@ -26,7 +28,7 @@ export function CoursesList() {
         console.error(error);
       }
     })();
-  }, [page]);
+  }, [page, reload]);
 
   const changePage = (_, data) => {
     setPage(data.activePage);
@@ -39,7 +41,7 @@ export function CoursesList() {
     <div className="courses-list">
       <div className="courses-list__items">
         {courses.map((course) => (
-          <CourseItem key={course._id} course={course} />
+          <CourseItem key={course._id} course={course} onReload={onReload} />
         ))}
       </div>
       <div className="courses-list__pagination">
