@@ -18,6 +18,8 @@ export const ENV = {
     COURSES_NEW: "courses/new",
     NEWSLETTER: "newsletter",
     NEWSLETTER_ALL: "newsletter/all",
+    POSTS: "posts",
+    POSTS_NEW: "posts/new",
   },
   JWT: {
     ACCESS: "access",

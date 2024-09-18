@@ -2,12 +2,8 @@
   &__add {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
-
-    > .ui.button {
-      margin: 0;
-    }
   }
+
   .ui.tab.segment {
     display: flex;
     flex-direction: column;
