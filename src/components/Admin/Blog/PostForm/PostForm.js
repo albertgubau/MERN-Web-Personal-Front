@@ -1,12 +1,30 @@
 import { useCallback } from "react";
-import { Form, Image } from "semantic-ui-react";
+import { ENV } from "../../../../utils";
+import { Form, Image, Icon } from "semantic-ui-react";
 import { useDropzone } from "react-dropzone";
 import { Editor } from "@tinymce/tinymce-react";
+import { useFormik } from "formik";
+import { initialValues, validationSchema } from "./PostForm.form";
 import "./PostForm.scss";
 
 export function PostForm() {
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema,
+    validateOnChange: false,
+    onSubmit: async (formValues) => {
+      try {
+        console.log(formValues);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
+
   const onDrop = useCallback((acceptedFile) => {
     const file = acceptedFile[0];
+    formik.setFieldValue("miniature", URL.createObjectURL(file));
+    formik.setFieldValue("file", file);
   });
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -15,14 +33,30 @@ export function PostForm() {
   });
 
   const getMiniature = () => {
-    return null;
+    if (formik.values.file) {
+      return formik.values.miniature;
+    } else if (formik.values.miniature) {
+      return `${ENV.BASE_API}/${formik.values.miniature}`;
+    }
   };
 
   return (
-    <Form className="post-forms">
+    <Form className="post-forms" onSubmit={formik.handleSubmit}>
       <Form.Group widths="equal">
-        <Form.Input name="title" placeholder="Post title" />
-        <Form.Input name="path" placeholder="Post path" />
+        <Form.Input
+          name="title"
+          placeholder="Post title"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          error={formik.errors.title}
+        />
+        <Form.Input
+          name="path"
+          placeholder="Post path"
+          value={formik.values.path}
+          onChange={formik.handleChange}
+          error={formik.errors.path}
+        />
       </Form.Group>
 
       <Editor
@@ -39,6 +73,9 @@ export function PostForm() {
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help",
         }}
+        initialValue={formik.values.content}
+        onChange={(e) => formik.setFieldValue("content", e.target.getContent())}
+        error={formik.errors.content}
       />
 
       <div className="post-form__miniature" {...getRootProps()}>
@@ -50,9 +87,10 @@ export function PostForm() {
             <span>Drop your image here</span>
           </div>
         )}
+        <Icon name="edit" />
       </div>
 
-      <Form.Button type="submit" primary fluid>
+      <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
         Create post
       </Form.Button>
     </Form>
