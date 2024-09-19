@@ -5,16 +5,25 @@ import { useDropzone } from "react-dropzone";
 import { Editor } from "@tinymce/tinymce-react";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./PostForm.form";
+import { Blog } from "../../../../api";
+import { useAuth } from "../../../../hooks";
 import "./PostForm.scss";
 
-export function PostForm() {
+const blogController = new Blog();
+
+export function PostForm(props) {
+  const { onClose, onReload } = props;
+  const { accessToken } = useAuth();
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema,
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
-        console.log(formValues);
+        await blogController.createPost(accessToken, formValues);
+        onReload();
+        onClose();
       } catch (error) {
         console.error(error);
       }
