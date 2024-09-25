@@ -8,6 +8,15 @@
     margin-bottom: 20px;
     position: relative;
 
+    .edit.icon {
+      font-size: 20px;
+      position: absolute;
+      height: auto;
+      margin: auto;
+      display: none;
+      pointer-events: none;
+    }
+
     .image {
       border-radius: 50% !important;
       width: 150px !important;
@@ -27,14 +36,4 @@
       }
     }
   }
-}
-
-.edit.icon {
-  font-size: 20px;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: none;
-  pointer-events: none;
 }

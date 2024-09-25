@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     position: relative;
 
@@ -25,6 +26,15 @@
         opacity: 0.6;
         cursor: pointer;
       }
+    }
+
+    .edit.icon {
+      font-size: 20px;
+      position: absolute;
+      height: auto;
+      margin: auto;
+      display: none;
+      pointer-events: none;
     }
 
     .ui.image {
@@ -44,6 +54,11 @@
           color: rgb(73, 73, 73);
         }
       }
+    }
+
+    &-error {
+      padding-top: 10px;
+      color: #9f3a38;
     }
   }
 }

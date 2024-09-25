@@ -12,16 +12,21 @@ import "./PostForm.scss";
 const blogController = new Blog();
 
 export function PostForm(props) {
-  const { onClose, onReload } = props;
+  const { post, onClose, onReload } = props;
   const { accessToken } = useAuth();
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: initialValues(post),
     validationSchema,
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
-        await blogController.createPost(accessToken, formValues);
+        if (post) {
+          await blogController.updatePost(accessToken, post._id, formValues);
+        } else {
+          await blogController.createPost(accessToken, formValues);
+        }
+
         onReload();
         onClose();
       } catch (error) {
@@ -36,7 +41,7 @@ export function PostForm(props) {
     formik.setFieldValue("file", file);
   });
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/png, image/jpg",
     onDrop,
   });
@@ -45,7 +50,7 @@ export function PostForm(props) {
     if (formik.values.file) {
       return formik.values.miniature;
     } else if (formik.values.miniature) {
-      return `${ENV.BASE_API}/${formik.values.miniature}`;
+      return `${ENV.BASE_PATH}/${formik.values.miniature}`;
     }
   };
 
@@ -90,17 +95,24 @@ export function PostForm(props) {
       <div className="post-form__miniature" {...getRootProps()}>
         <input {...getInputProps()} />
         {getMiniature() ? (
-          <Image size="small" src={getMiniature()} />
+          <Image
+            size="small"
+            src={getMiniature()}
+            style={{ opacity: isDragActive && 0.5 }}
+          />
         ) : (
           <div>
             <span>Drop your image here</span>
           </div>
         )}
-        <Icon name="edit" />
+        <Icon name="edit" className="post-form__miniature-edit" />
+        <span className="post-form__miniature-error">
+          {formik.errors.miniature}
+        </span>
       </div>
 
       <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
-        Create post
+        {post ? "Update post" : "Create post"}
       </Form.Button>
     </Form>
   );
