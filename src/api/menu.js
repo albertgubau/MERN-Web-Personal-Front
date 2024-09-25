@@ -77,7 +77,7 @@ export class Menu {
     }
   }
 
-  async getMenus(active = undefined) {
+  async getMenuItems(active = undefined) {
     try {
       const url = `${this.baseApi}/${ENV.API_ROUTES.MENU_ALL}?active=${active}`;
 

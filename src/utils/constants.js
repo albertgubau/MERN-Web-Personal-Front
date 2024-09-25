@@ -17,6 +17,7 @@ export const ENV = {
     COURSES: "courses",
     COURSES_NEW: "courses/new",
     NEWSLETTER: "newsletter",
+    NEWSLETTER_SUBSCRIBE: "newsletter/subscribe",
     NEWSLETTER_ALL: "newsletter/all",
     POSTS: "posts",
     POSTS_NEW: "posts/new",
