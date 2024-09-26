@@ -6,13 +6,13 @@ export const reviewsData = [
     userType: "Frontend Tech Lead",
     avatar: image.avatar01,
     comment:
-      "Con gusto recomiendo a mi compañero, Albert, por su destacada contribución al proyecto de web components de arquitectura openfront en Caixa. Durante nuestra colaboración en este proyecto desafiante, Albert ha demostrado habilidades excepcionales que han superado las expectativas de su experiencia.",
+      "I am pleased to recommend my colleague, Albert, for his outstanding contribution to the OpenFront Web Components Architecture project at Caixa. During our collaboration on this challenging project, Albert demonstrated exceptional skills that exceeded the expectations of his experience.",
   },
   {
     userName: "Marc Valero",
     userType: "Mobile Developer",
     avatar: image.avatar02,
     comment:
-      "Durante nuestro tiempo juntos en el proyecto, pude apreciar la dedicación y la pasión que Albert aportaba a su trabajo. Su profundo entendimiento de los conceptos técnicos involucrados y su habilidad para aplicarlos de manera efectiva nos permitieron enfrentar desafíos complejos con confianza y éxito.",
+      "During our time together on the project, I came to appreciate the dedication and passion Albert brought to his work. His deep understanding of the technical concepts involved and his ability to apply them effectively allowed us to tackle complex challenges with confidence and success.",
   },
 ];
