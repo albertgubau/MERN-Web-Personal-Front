@@ -11,13 +11,16 @@
 
   &__all-courses {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0 -10px;
 
     > a {
-      width: 50%;
+      width: 35%;
       display: flex;
       padding: 10px;
+      margin: 10px 20px;
+      box-shadow: 0 0 10px 2px rgb(0 0 0 /75%);
 
       &:hover {
         opacity: 0.6;
