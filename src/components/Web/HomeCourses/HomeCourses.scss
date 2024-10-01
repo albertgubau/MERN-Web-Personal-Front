@@ -17,6 +17,8 @@
 
     > a {
       width: 35%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: flex;
       padding: 10px;
       margin: 10px 20px;
@@ -27,6 +29,8 @@
       }
 
       .ui.image {
+        background-color: white;
+        aspect-ratio: 16/9;
         height: 100px;
       }
 

@@ -88,6 +88,22 @@ export class Blog {
     }
   }
 
+  async getPostByPath(path) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.POSTS}/${path}`;
+
+      const response = await fetch(url, { method: "GET" });
+
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getPosts(page = 1, limit = 10) {
     try {
       const url = `${this.baseApi}/${ENV.API_ROUTES.POSTS}?page=${page}&limit=${limit}`;
